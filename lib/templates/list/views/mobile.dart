@@ -14,7 +14,7 @@ class MobileView extends StatelessWidget {
     required this.navigator,
     required this.nullItems,
     required this.emptyItems,
-  })   : childDelagate = SliverChildListDelegate(
+  })  : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
           addRepaintBoundaries: false,
@@ -33,7 +33,7 @@ class MobileView extends StatelessWidget {
     required this.navigator,
     required this.nullItems,
     required this.emptyItems,
-  })   : childDelagate = SliverChildBuilderDelegate(
+  })  : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
           addAutomaticKeepAlives: false,
@@ -73,11 +73,11 @@ class MobileView extends StatelessWidget {
                 nullItems != null) {
               return SliverFillRemaining(child: nullItems);
             }
-            if (childDelagate.estimatedChildCount != null &&
-                childDelagate.estimatedChildCount == 0 &&
-                emptyItems != null) {
-              return SliverFillRemaining(child: emptyItems);
-            }
+            // if (childDelagate.estimatedChildCount != null &&
+            //     childDelagate.estimatedChildCount == 0 &&
+            //     emptyItems != null) {
+            //   return SliverFillRemaining(child: emptyItems);
+            // }
             return SliverList(
                 delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -122,7 +122,7 @@ class DetailView extends StatelessWidget {
     required this.itemCount,
     required DetailsScreen details,
     required this.detailScaffoldKey,
-  })   : _details = details,
+  })  : _details = details,
         super(key: key);
 
   final int? itemCount;

@@ -207,11 +207,11 @@ class _TabletViewState extends State<TabletView> {
                           widget.nullItems != null) {
                         return SliverFillRemaining(child: widget.nullItems);
                       }
-                      if (_childDelagate.estimatedChildCount != null &&
-                          _childDelagate.estimatedChildCount == 0 &&
-                          widget.emptyItems != null) {
-                        return SliverFillRemaining(child: widget.emptyItems);
-                      }
+                      // if (_childDelagate.estimatedChildCount != null &&
+                      //     _childDelagate.estimatedChildCount == 0 &&
+                      //     widget.emptyItems != null) {
+                      //   return SliverFillRemaining(child: widget.emptyItems);
+                      // }
                       return SliverList(
                           delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
@@ -254,10 +254,12 @@ class _TabletViewState extends State<TabletView> {
             flex: widget.flexDetailView,
             child: _DetailView(
               detailScaffoldKey: widget.detailScaffoldKey,
-              details: _index == null ||
-                      _index! > widget.childDelagate.estimatedChildCount! - 1
-                  ? null
-                  : widget.detailBuilder(context, _index, true),
+              details:
+                  // _index == null ||
+                  //         _index! > widget.childDelagate.estimatedChildCount! - 1
+                  //     ? null
+                  //     :
+                  widget.detailBuilder(context, _index, true),
               itemNotSelected: widget.itemNotSelected,
             ),
           ),
