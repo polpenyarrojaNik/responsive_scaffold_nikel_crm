@@ -4,17 +4,18 @@ import '../../../responsive_scaffold.dart';
 import '../responsive_list.dart';
 
 class MobileView extends StatelessWidget {
-  MobileView({
-    Key? key,
-    required this.slivers,
-    required this.detailBuilder,
-    required List<Widget> children,
-    required this.detailScaffoldKey,
-    required this.useRootNavigator,
-    required this.navigator,
-    required this.nullItems,
-    required this.emptyItems,
-  })  : childDelagate = SliverChildListDelegate(
+  MobileView(
+      {Key? key,
+      required this.slivers,
+      required this.detailBuilder,
+      required List<Widget> children,
+      required this.detailScaffoldKey,
+      required this.useRootNavigator,
+      required this.navigator,
+      required this.nullItems,
+      required this.emptyItems,
+      required this.scrollController})
+      : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
           addRepaintBoundaries: false,
@@ -22,18 +23,19 @@ class MobileView extends StatelessWidget {
         ),
         super(key: key);
 
-  MobileView.builder({
-    Key? key,
-    required this.slivers,
-    required this.detailBuilder,
-    required int itemCount,
-    required IndexedWidgetBuilder itemBuilder,
-    required this.detailScaffoldKey,
-    required this.useRootNavigator,
-    required this.navigator,
-    required this.nullItems,
-    required this.emptyItems,
-  })  : childDelagate = SliverChildBuilderDelegate(
+  MobileView.builder(
+      {Key? key,
+      required this.slivers,
+      required this.detailBuilder,
+      required int itemCount,
+      required IndexedWidgetBuilder itemBuilder,
+      required this.detailScaffoldKey,
+      required this.useRootNavigator,
+      required this.navigator,
+      required this.nullItems,
+      required this.emptyItems,
+      required this.scrollController})
+      : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
           addAutomaticKeepAlives: false,
@@ -52,6 +54,7 @@ class MobileView extends StatelessWidget {
     required this.navigator,
     required this.nullItems,
     required this.emptyItems,
+    required this.scrollController,
   }) : super(key: key);
 
   final List<Widget>? slivers;
@@ -61,10 +64,12 @@ class MobileView extends StatelessWidget {
   final NavigatorState? navigator;
   final Widget? nullItems, emptyItems;
   final SliverChildDelegate childDelagate;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: scrollController,
       slivers: <Widget>[
         ...?slivers,
         Builder(

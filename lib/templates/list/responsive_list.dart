@@ -241,6 +241,7 @@ class ResponsiveListScaffold extends StatelessWidget {
             detailBuilder: detailBuilder,
             childDelagate: childDelagate,
             navigator: mobileNavigator,
+            scrollController: scrollController,
           ),
         );
       },
