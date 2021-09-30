@@ -73,11 +73,11 @@ class MobileView extends StatelessWidget {
                 nullItems != null) {
               return SliverFillRemaining(child: nullItems);
             }
-            // if (childDelagate.estimatedChildCount != null &&
-            //     childDelagate.estimatedChildCount == 0 &&
-            //     emptyItems != null) {
-            //   return SliverFillRemaining(child: emptyItems);
-            // }
+            if (childDelagate.estimatedChildCount != null &&
+                childDelagate.estimatedChildCount == 0 &&
+                emptyItems != null) {
+              return SliverFillRemaining(child: emptyItems);
+            }
             return SliverList(
                 delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
