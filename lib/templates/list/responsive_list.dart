@@ -9,7 +9,7 @@ export 'package:responsive_scaffold_nullsafe/data/classes/details.dart';
 class ResponsiveListScaffold extends StatelessWidget {
   ResponsiveListScaffold({
     Key? key,
-    this.tabletBreakpoint = 720.0,
+    this.tabletBreakpoint = 1080.0,
     required this.detailBuilder,
     this.appBar,
     this.drawer,
@@ -49,7 +49,7 @@ class ResponsiveListScaffold extends StatelessWidget {
 
   ResponsiveListScaffold.builder(
       {Key? key,
-      this.tabletBreakpoint = 720.0,
+      this.tabletBreakpoint = 1080.0,
       required this.detailBuilder,
       this.appBar,
       this.drawer,
@@ -91,7 +91,7 @@ class ResponsiveListScaffold extends StatelessWidget {
 
   const ResponsiveListScaffold.custom(
       {Key? key,
-      this.tabletBreakpoint = 720.0,
+      this.tabletBreakpoint = 1080.0,
       required this.detailBuilder,
       this.appBar,
       this.drawer,

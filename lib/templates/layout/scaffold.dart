@@ -14,7 +14,7 @@ class ResponsiveScaffold extends StatelessWidget {
     this.floatingActionButton,
     this.menuIcon,
     this.endIcon,
-    this.kTabletBreakpoint = 720.0,
+    this.kTabletBreakpoint = 1080.0,
     this.kDesktopBreakpoint = 1440.0,
   }) : super(key: key);
 
