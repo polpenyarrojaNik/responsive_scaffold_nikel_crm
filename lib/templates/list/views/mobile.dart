@@ -16,6 +16,7 @@ class MobileView extends StatelessWidget {
       required this.nullItems,
       required this.emptyItems,
       required this.scrollController,
+      required this.haveConnection,
       required this.text})
       : childDelagate = SliverChildListDelegate(
           children,
@@ -37,6 +38,7 @@ class MobileView extends StatelessWidget {
       required this.nullItems,
       required this.emptyItems,
       required this.scrollController,
+      required this.haveConnection,
       required this.text})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
@@ -58,6 +60,7 @@ class MobileView extends StatelessWidget {
       required this.nullItems,
       required this.emptyItems,
       required this.scrollController,
+      required this.haveConnection,
       required this.text})
       : super(key: key);
 
@@ -69,12 +72,13 @@ class MobileView extends StatelessWidget {
   final Widget? nullItems, emptyItems;
   final SliverChildDelegate childDelagate;
   final ScrollController scrollController;
+  final bool haveConnection;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      NotConnectionWidget(text: text),
+      if (!haveConnection) NotConnectionWidget(text: text),
       Expanded(
           child: CustomScrollView(
         controller: scrollController,

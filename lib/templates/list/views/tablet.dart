@@ -34,6 +34,7 @@ class TabletView extends StatefulWidget {
       required this.nullItems,
       required this.emptyItems,
       required this.scrollController,
+      required this.haveConnection,
       required this.text})
       : childDelagate = SliverChildListDelegate(
           children,
@@ -72,6 +73,7 @@ class TabletView extends StatefulWidget {
       required this.nullItems,
       required this.emptyItems,
       required this.scrollController,
+      required this.haveConnection,
       required this.text})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
@@ -110,6 +112,7 @@ class TabletView extends StatefulWidget {
       required this.nullItems,
       required this.emptyItems,
       required this.scrollController,
+      required this.haveConnection,
       required this.text})
       : super(key: key);
 
@@ -154,6 +157,8 @@ class TabletView extends StatefulWidget {
   final SliverChildDelegate childDelagate;
 
   final ScrollController scrollController;
+
+  final bool haveConnection;
 
   final String text;
 
@@ -204,7 +209,8 @@ class _TabletViewState extends State<TabletView> {
                   endDrawer: widget.endDrawer,
                   appBar: widget.appBar,
                   body: Column(children: [
-                    NotConnectionWidget(text: widget.text),
+                    if (!widget.haveConnection)
+                      NotConnectionWidget(text: widget.text),
                     Expanded(
                       child: CustomScrollView(
                         controller: widget.scrollController,

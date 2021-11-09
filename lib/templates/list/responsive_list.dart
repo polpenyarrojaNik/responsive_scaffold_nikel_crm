@@ -39,6 +39,7 @@ class ResponsiveListScaffold extends StatelessWidget {
       this.mobileRootNavigator = false,
       this.mobileNavigator,
       required this.scrollController,
+      required this.haveConnection,
       required this.text})
       : childDelagate = SliverChildListDelegate(
           children,
@@ -81,6 +82,7 @@ class ResponsiveListScaffold extends StatelessWidget {
       this.mobileRootNavigator = false,
       this.mobileNavigator,
       required this.scrollController,
+      required this.haveConnection,
       required this.text})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
@@ -123,6 +125,7 @@ class ResponsiveListScaffold extends StatelessWidget {
       this.mobileRootNavigator = false,
       this.mobileNavigator,
       required this.scrollController,
+      required this.haveConnection,
       required this.text})
       : super(key: key);
 
@@ -180,6 +183,8 @@ class ResponsiveListScaffold extends StatelessWidget {
 
   final ScrollController scrollController;
 
+  final bool haveConnection;
+
   final String text;
 
   @override
@@ -217,6 +222,7 @@ class ResponsiveListScaffold extends StatelessWidget {
             sideMenu: tabletSideMenu,
             itemNotSelected: tabletItemNotSelected,
             scrollController: scrollController,
+            haveConnection: haveConnection,
             text: text,
           );
         }
@@ -248,6 +254,7 @@ class ResponsiveListScaffold extends StatelessWidget {
               childDelagate: childDelagate,
               navigator: mobileNavigator,
               scrollController: scrollController,
+              haveConnection: haveConnection,
               text: text),
         );
       },
