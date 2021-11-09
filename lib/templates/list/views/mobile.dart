@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../not_connection_widget.dart';
 
 import '../../../responsive_scaffold.dart';
 import '../responsive_list.dart';
@@ -14,7 +15,8 @@ class MobileView extends StatelessWidget {
       required this.navigator,
       required this.nullItems,
       required this.emptyItems,
-      required this.scrollController})
+      required this.scrollController,
+      required this.text})
       : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -34,7 +36,8 @@ class MobileView extends StatelessWidget {
       required this.navigator,
       required this.nullItems,
       required this.emptyItems,
-      required this.scrollController})
+      required this.scrollController,
+      required this.text})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -44,18 +47,19 @@ class MobileView extends StatelessWidget {
         ),
         super(key: key);
 
-  const MobileView.custom({
-    Key? key,
-    required this.slivers,
-    required this.detailBuilder,
-    required this.childDelagate,
-    required this.detailScaffoldKey,
-    required this.useRootNavigator,
-    required this.navigator,
-    required this.nullItems,
-    required this.emptyItems,
-    required this.scrollController,
-  }) : super(key: key);
+  const MobileView.custom(
+      {Key? key,
+      required this.slivers,
+      required this.detailBuilder,
+      required this.childDelagate,
+      required this.detailScaffoldKey,
+      required this.useRootNavigator,
+      required this.navigator,
+      required this.nullItems,
+      required this.emptyItems,
+      required this.scrollController,
+      required this.text})
+      : super(key: key);
 
   final List<Widget>? slivers;
   final DetailWidgetBuilder detailBuilder;
@@ -65,59 +69,65 @@ class MobileView extends StatelessWidget {
   final Widget? nullItems, emptyItems;
   final SliverChildDelegate childDelagate;
   final ScrollController scrollController;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: scrollController,
-      slivers: <Widget>[
-        ...?slivers,
-        Builder(
-          builder: (BuildContext context) {
-            if (childDelagate.estimatedChildCount == null &&
-                nullItems != null) {
-              return SliverFillRemaining(child: nullItems);
-            }
-            if (childDelagate.estimatedChildCount != null &&
-                childDelagate.estimatedChildCount == 0 &&
-                emptyItems != null) {
-              return SliverFillRemaining(child: emptyItems);
-            }
-            return SliverList(
-                delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return KeepAlive(
-                  keepAlive: true,
-                  child: IndexedSemantics(
-                    index: index,
-                    child: GestureDetector(
-                      onTap: () {
-                        (navigator ?? Navigator.of(context))
-                            .push(MaterialPageRoute(builder: (context) {
-                          final _details = detailBuilder(context, index, false);
-                          return DetailView(
-                              detailScaffoldKey: detailScaffoldKey,
-                              itemCount: childDelagate.estimatedChildCount,
-                              details: _details);
-                        }));
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: childDelagate.build(context, index),
+    return Column(children: [
+      NotConnectionWidget(text: text),
+      Expanded(
+          child: CustomScrollView(
+        controller: scrollController,
+        slivers: <Widget>[
+          ...?slivers,
+          Builder(
+            builder: (BuildContext context) {
+              if (childDelagate.estimatedChildCount == null &&
+                  nullItems != null) {
+                return SliverFillRemaining(child: nullItems);
+              }
+              if (childDelagate.estimatedChildCount != null &&
+                  childDelagate.estimatedChildCount == 0 &&
+                  emptyItems != null) {
+                return SliverFillRemaining(child: emptyItems);
+              }
+              return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return KeepAlive(
+                    keepAlive: true,
+                    child: IndexedSemantics(
+                      index: index,
+                      child: GestureDetector(
+                        onTap: () {
+                          (navigator ?? Navigator.of(context))
+                              .push(MaterialPageRoute(builder: (context) {
+                            final _details =
+                                detailBuilder(context, index, false);
+                            return DetailView(
+                                detailScaffoldKey: detailScaffoldKey,
+                                itemCount: childDelagate.estimatedChildCount,
+                                details: _details);
+                          }));
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: childDelagate.build(context, index),
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-              childCount: childDelagate.estimatedChildCount ?? 0,
-              addAutomaticKeepAlives: false,
-              addRepaintBoundaries: false,
-              addSemanticIndexes: false,
-            ));
-          },
-        )
-      ],
-    );
+                  );
+                },
+                childCount: childDelagate.estimatedChildCount ?? 0,
+                addAutomaticKeepAlives: false,
+                addRepaintBoundaries: false,
+                addSemanticIndexes: false,
+              ));
+            },
+          )
+        ],
+      ))
+    ]);
   }
 }
 

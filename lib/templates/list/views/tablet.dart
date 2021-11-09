@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../not_connection_widget.dart';
 import '../../../responsive_scaffold.dart';
 import '../responsive_list.dart';
 
@@ -32,7 +33,8 @@ class TabletView extends StatefulWidget {
       required this.detailScaffoldKey,
       required this.nullItems,
       required this.emptyItems,
-      required this.scrollController})
+      required this.scrollController,
+      required this.text})
       : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -69,7 +71,8 @@ class TabletView extends StatefulWidget {
       required this.detailScaffoldKey,
       required this.nullItems,
       required this.emptyItems,
-      required this.scrollController})
+      required this.scrollController,
+      required this.text})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -106,7 +109,8 @@ class TabletView extends StatefulWidget {
       required this.detailScaffoldKey,
       required this.nullItems,
       required this.emptyItems,
-      required this.scrollController})
+      required this.scrollController,
+      required this.text})
       : super(key: key);
 
   final List<Widget>? slivers;
@@ -151,6 +155,8 @@ class TabletView extends StatefulWidget {
 
   final ScrollController scrollController;
 
+  final String text;
+
   @override
   _TabletViewState createState() => _TabletViewState();
 }
@@ -178,78 +184,87 @@ class _TabletViewState extends State<TabletView> {
         children: <Widget>[
           widget.sideMenu ?? Container(),
           Flexible(
-            flex: widget.flexListView,
-            child: Scaffold(
-              key: widget.scaffoldkey,
-              floatingActionButton: widget.floatingActionButton,
-              floatingActionButtonLocation: widget.floatingActionButtonLocation,
-              bottomNavigationBar: widget.bottomNavigationBar,
-              bottomSheet: widget.bottomSheet,
-              persistentFooterButtons: widget.persistentFooterButtons,
-              floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
-              resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-              // resizeToAvoidBottomPadding: widget.resizeToAvoidBottomPadding,
-              primary: widget.primary,
-              // extendBody: extendBody,
-              backgroundColor: widget.backgroundColor,
-              drawer: widget.drawer,
-              endDrawer: widget.endDrawer,
-              appBar: widget.appBar,
-              body: CustomScrollView(
-                controller: widget.scrollController,
-                slivers: <Widget>[
-                  ...?widget.slivers,
-                  Builder(
-                    builder: (BuildContext context) {
-                      final SliverChildDelegate _childDelagate =
-                          widget.childDelagate;
-                      if (_childDelagate.estimatedChildCount == null &&
-                          widget.nullItems != null) {
-                        return SliverFillRemaining(child: widget.nullItems);
-                      }
-                      if (_childDelagate.estimatedChildCount != null &&
-                          _childDelagate.estimatedChildCount == 0 &&
-                          widget.emptyItems != null) {
-                        return SliverFillRemaining(child: widget.emptyItems);
-                      }
-                      return SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
-                          return KeepAlive(
-                            keepAlive: true,
-                            child: IndexedSemantics(
-                              index: index,
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _index = index;
-                                  });
+              flex: widget.flexListView,
+              child: Scaffold(
+                  key: widget.scaffoldkey,
+                  floatingActionButton: widget.floatingActionButton,
+                  floatingActionButtonLocation:
+                      widget.floatingActionButtonLocation,
+                  bottomNavigationBar: widget.bottomNavigationBar,
+                  bottomSheet: widget.bottomSheet,
+                  persistentFooterButtons: widget.persistentFooterButtons,
+                  floatingActionButtonAnimator:
+                      widget.floatingActionButtonAnimator,
+                  resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+                  // resizeToAvoidBottomPadding: widget.resizeToAvoidBottomPadding,
+                  primary: widget.primary,
+                  // extendBody: extendBody,
+                  backgroundColor: widget.backgroundColor,
+                  drawer: widget.drawer,
+                  endDrawer: widget.endDrawer,
+                  appBar: widget.appBar,
+                  body: Column(children: [
+                    NotConnectionWidget(text: widget.text),
+                    Expanded(
+                      child: CustomScrollView(
+                        controller: widget.scrollController,
+                        slivers: <Widget>[
+                          ...?widget.slivers,
+                          Builder(
+                            builder: (BuildContext context) {
+                              final SliverChildDelegate _childDelagate =
+                                  widget.childDelagate;
+                              if (_childDelagate.estimatedChildCount == null &&
+                                  widget.nullItems != null) {
+                                return SliverFillRemaining(
+                                    child: widget.nullItems);
+                              }
+                              if (_childDelagate.estimatedChildCount != null &&
+                                  _childDelagate.estimatedChildCount == 0 &&
+                                  widget.emptyItems != null) {
+                                return SliverFillRemaining(
+                                    child: widget.emptyItems);
+                              }
+                              return SliverList(
+                                  delegate: SliverChildBuilderDelegate(
+                                (BuildContext context, int index) {
+                                  return KeepAlive(
+                                    keepAlive: true,
+                                    child: IndexedSemantics(
+                                      index: index,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _index = index;
+                                          });
+                                        },
+                                        child: Container(
+                                          color: _index == index
+                                              ? Theme.of(context)
+                                                  .chipTheme
+                                                  .disabledColor
+                                              : widget.backgroundColor,
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0),
+                                          child: _childDelagate.build(
+                                              context, index),
+                                        ),
+                                      ),
+                                    ),
+                                  );
                                 },
-                                child: Container(
-                                  color: _index == index
-                                      ? Theme.of(context)
-                                          .chipTheme
-                                          .disabledColor
-                                      : widget.backgroundColor,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: _childDelagate.build(context, index),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                        childCount: _childDelagate.estimatedChildCount ?? 0,
-                        addAutomaticKeepAlives: false,
-                        addRepaintBoundaries: false,
-                        addSemanticIndexes: false,
-                      ));
-                    },
-                  )
-                ],
-              ),
-            ),
-          ),
+                                childCount:
+                                    _childDelagate.estimatedChildCount ?? 0,
+                                addAutomaticKeepAlives: false,
+                                addRepaintBoundaries: false,
+                                addSemanticIndexes: false,
+                              ));
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ]))),
           Flexible(
             flex: widget.flexDetailView,
             child: _DetailView(

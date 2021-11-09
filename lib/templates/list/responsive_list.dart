@@ -7,39 +7,40 @@ import 'views/index.dart';
 export 'package:responsive_scaffold_nullsafe/data/classes/details.dart';
 
 class ResponsiveListScaffold extends StatelessWidget {
-  ResponsiveListScaffold({
-    Key? key,
-    this.tabletBreakpoint = 1080.0,
-    required this.detailBuilder,
-    this.appBar,
-    this.drawer,
-    this.slivers,
-    this.endDrawer,
-    required List<Widget> children,
-    this.primary = true,
-    // this.extendBody = false,
-    this.drawerDragStartBehavior = DragStartBehavior.start,
-    this.backgroundColor,
-    this.bottomNavigationBar,
-    this.bottomSheet,
-    this.floatingActionButton,
-    this.floatingActionButtonAnimator,
-    this.floatingActionButtonLocation,
-    this.persistentFooterButtons,
-    this.resizeToAvoidBottomInset,
-    this.resizeToAvoidBottomPadding,
-    this.tabletItemNotSelected,
-    this.tabletSideMenu,
-    this.nullItems,
-    this.emptyItems,
-    this.tabletFlexDetailView = 8,
-    this.tabletFlexListView = 3,
-    this.scaffoldKey,
-    this.detailScaffoldKey,
-    this.mobileRootNavigator = false,
-    this.mobileNavigator,
-    required this.scrollController,
-  })  : childDelagate = SliverChildListDelegate(
+  ResponsiveListScaffold(
+      {Key? key,
+      this.tabletBreakpoint = 1080.0,
+      required this.detailBuilder,
+      this.appBar,
+      this.drawer,
+      this.slivers,
+      this.endDrawer,
+      required List<Widget> children,
+      this.primary = true,
+      // this.extendBody = false,
+      this.drawerDragStartBehavior = DragStartBehavior.start,
+      this.backgroundColor,
+      this.bottomNavigationBar,
+      this.bottomSheet,
+      this.floatingActionButton,
+      this.floatingActionButtonAnimator,
+      this.floatingActionButtonLocation,
+      this.persistentFooterButtons,
+      this.resizeToAvoidBottomInset,
+      this.resizeToAvoidBottomPadding,
+      this.tabletItemNotSelected,
+      this.tabletSideMenu,
+      this.nullItems,
+      this.emptyItems,
+      this.tabletFlexDetailView = 8,
+      this.tabletFlexListView = 3,
+      this.scaffoldKey,
+      this.detailScaffoldKey,
+      this.mobileRootNavigator = false,
+      this.mobileNavigator,
+      required this.scrollController,
+      required this.text})
+      : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
           addRepaintBoundaries: false,
@@ -79,7 +80,8 @@ class ResponsiveListScaffold extends StatelessWidget {
       this.detailScaffoldKey,
       this.mobileRootNavigator = false,
       this.mobileNavigator,
-      required this.scrollController})
+      required this.scrollController,
+      required this.text})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -120,7 +122,8 @@ class ResponsiveListScaffold extends StatelessWidget {
       this.detailScaffoldKey,
       this.mobileRootNavigator = false,
       this.mobileNavigator,
-      required this.scrollController})
+      required this.scrollController,
+      required this.text})
       : super(key: key);
 
   final double tabletBreakpoint;
@@ -177,6 +180,8 @@ class ResponsiveListScaffold extends StatelessWidget {
 
   final ScrollController scrollController;
 
+  final String text;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -212,6 +217,7 @@ class ResponsiveListScaffold extends StatelessWidget {
             sideMenu: tabletSideMenu,
             itemNotSelected: tabletItemNotSelected,
             scrollController: scrollController,
+            text: text,
           );
         }
 
@@ -233,16 +239,16 @@ class ResponsiveListScaffold extends StatelessWidget {
           endDrawer: endDrawer,
           appBar: appBar,
           body: MobileView.custom(
-            useRootNavigator: mobileRootNavigator,
-            nullItems: nullItems,
-            emptyItems: emptyItems,
-            slivers: slivers,
-            detailScaffoldKey: detailScaffoldKey,
-            detailBuilder: detailBuilder,
-            childDelagate: childDelagate,
-            navigator: mobileNavigator,
-            scrollController: scrollController,
-          ),
+              useRootNavigator: mobileRootNavigator,
+              nullItems: nullItems,
+              emptyItems: emptyItems,
+              slivers: slivers,
+              detailScaffoldKey: detailScaffoldKey,
+              detailBuilder: detailBuilder,
+              childDelagate: childDelagate,
+              navigator: mobileNavigator,
+              scrollController: scrollController,
+              text: text),
         );
       },
     );
