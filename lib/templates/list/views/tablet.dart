@@ -214,6 +214,8 @@ class _TabletViewState extends State<TabletView> {
                     Expanded(
                       child: CustomScrollView(
                         controller: widget.scrollController,
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
                         slivers: <Widget>[
                           ...?widget.slivers,
                           Builder(

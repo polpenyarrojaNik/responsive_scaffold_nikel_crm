@@ -82,6 +82,8 @@ class MobileView extends StatelessWidget {
       Expanded(
           child: CustomScrollView(
         controller: scrollController,
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         slivers: <Widget>[
           ...?slivers,
           Builder(
