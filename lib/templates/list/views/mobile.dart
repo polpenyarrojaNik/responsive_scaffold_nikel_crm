@@ -84,8 +84,11 @@ class MobileView extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       if (!haveConnection) NotConnectionWidget(text: text),
       if (registros != null)
-        Text('$registros Items',
-            style: const TextStyle(color: Colors.grey, fontSize: 12)),
+        Container(
+          padding: const EdgeInsets.all(8),
+          child: Text('$registros Items',
+              style: const TextStyle(color: Colors.grey, fontSize: 12)),
+        ),
       Expanded(
           child: CustomScrollView(
         controller: scrollController,

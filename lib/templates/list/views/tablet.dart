@@ -221,9 +221,11 @@ class _TabletViewState extends State<TabletView> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text('${widget.registros} Items',
-                            style: const TextStyle(
-                                color: Colors.grey, fontSize: 12)),
+                        Container(
+                            padding: const EdgeInsets.all(8),
+                            child: Text('${widget.registros} Items',
+                                style: const TextStyle(
+                                    color: Colors.grey, fontSize: 12))),
                         Expanded(
                           child: CustomScrollView(
                             controller: widget.scrollController,
