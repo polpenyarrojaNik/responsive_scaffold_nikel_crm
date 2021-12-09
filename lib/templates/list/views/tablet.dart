@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -6,37 +8,38 @@ import '../../../responsive_scaffold.dart';
 import '../responsive_list.dart';
 
 class TabletView extends StatefulWidget {
-  TabletView(
-      {Key? key,
-      required this.slivers,
-      required this.detailBuilder,
-      required List<Widget> children,
-      required this.itemNotSelected,
-      required this.sideMenu,
-      this.flexListView = 4,
-      this.flexDetailView = 8,
-      required this.appBar,
-      required this.backgroundColor,
-      required this.bottomNavigationBar,
-      required this.bottomSheet,
-      required this.drawer,
-      required this.drawerDragStartBehavior,
-      required this.endDrawer,
-      required this.floatingActionButton,
-      required this.floatingActionButtonAnimator,
-      required this.floatingActionButtonLocation,
-      required this.persistentFooterButtons,
-      required this.primary,
-      required this.resizeToAvoidBottomInset,
-      required this.resizeToAvoidBottomPadding,
-      required this.scaffoldkey,
-      required this.detailScaffoldKey,
-      required this.nullItems,
-      required this.emptyItems,
-      required this.scrollController,
-      required this.haveConnection,
-      required this.text})
-      : childDelagate = SliverChildListDelegate(
+  TabletView({
+    Key? key,
+    required this.slivers,
+    required this.detailBuilder,
+    required List<Widget> children,
+    required this.itemNotSelected,
+    required this.sideMenu,
+    this.flexListView = 4,
+    this.flexDetailView = 8,
+    required this.appBar,
+    required this.backgroundColor,
+    required this.bottomNavigationBar,
+    required this.bottomSheet,
+    required this.drawer,
+    required this.drawerDragStartBehavior,
+    required this.endDrawer,
+    required this.floatingActionButton,
+    required this.floatingActionButtonAnimator,
+    required this.floatingActionButtonLocation,
+    required this.persistentFooterButtons,
+    required this.primary,
+    required this.resizeToAvoidBottomInset,
+    required this.resizeToAvoidBottomPadding,
+    required this.scaffoldkey,
+    required this.detailScaffoldKey,
+    required this.nullItems,
+    required this.emptyItems,
+    required this.scrollController,
+    required this.haveConnection,
+    required this.text,
+    required this.registros,
+  })  : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
           addRepaintBoundaries: false,
@@ -74,7 +77,8 @@ class TabletView extends StatefulWidget {
       required this.emptyItems,
       required this.scrollController,
       required this.haveConnection,
-      required this.text})
+      required this.text,
+      required this.registros})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -113,7 +117,8 @@ class TabletView extends StatefulWidget {
       required this.emptyItems,
       required this.scrollController,
       required this.haveConnection,
-      required this.text})
+      required this.text,
+      required this.registros})
       : super(key: key);
 
   final List<Widget>? slivers;
@@ -161,6 +166,8 @@ class TabletView extends StatefulWidget {
   final bool haveConnection;
 
   final String text;
+
+  final int? registros;
 
   @override
   _TabletViewState createState() => _TabletViewState();
@@ -211,66 +218,77 @@ class _TabletViewState extends State<TabletView> {
                   body: Column(children: [
                     if (!widget.haveConnection)
                       NotConnectionWidget(text: widget.text),
-                    Expanded(
-                      child: CustomScrollView(
-                        controller: widget.scrollController,
-                        physics: const BouncingScrollPhysics(
-                            parent: AlwaysScrollableScrollPhysics()),
-                        slivers: <Widget>[
-                          ...?widget.slivers,
-                          Builder(
-                            builder: (BuildContext context) {
-                              final SliverChildDelegate _childDelagate =
-                                  widget.childDelagate;
-                              if (_childDelagate.estimatedChildCount == null &&
-                                  widget.nullItems != null) {
-                                return SliverFillRemaining(
-                                    child: widget.nullItems);
-                              }
-                              if (_childDelagate.estimatedChildCount != null &&
-                                  _childDelagate.estimatedChildCount == 0 &&
-                                  widget.emptyItems != null) {
-                                return SliverFillRemaining(
-                                    child: widget.emptyItems);
-                              }
-                              return SliverList(
-                                  delegate: SliverChildBuilderDelegate(
-                                (BuildContext context, int index) {
-                                  return KeepAlive(
-                                    keepAlive: true,
-                                    child: IndexedSemantics(
-                                      index: index,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            _index = index;
-                                          });
-                                        },
-                                        child: Container(
-                                          color: _index == index
-                                              ? Theme.of(context)
-                                                  .chipTheme
-                                                  .disabledColor
-                                              : widget.backgroundColor,
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5.0),
-                                          child: _childDelagate.build(
-                                              context, index),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text('${widget.registros} Items',
+                            style: const TextStyle(
+                                color: Colors.grey, fontSize: 12)),
+                        Expanded(
+                          child: CustomScrollView(
+                            controller: widget.scrollController,
+                            physics: const BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics()),
+                            slivers: <Widget>[
+                              ...?widget.slivers,
+                              Builder(
+                                builder: (BuildContext context) {
+                                  final SliverChildDelegate _childDelagate =
+                                      widget.childDelagate;
+                                  if (_childDelagate.estimatedChildCount ==
+                                          null &&
+                                      widget.nullItems != null) {
+                                    return SliverFillRemaining(
+                                        child: widget.nullItems);
+                                  }
+                                  if (_childDelagate.estimatedChildCount !=
+                                          null &&
+                                      _childDelagate.estimatedChildCount == 0 &&
+                                      widget.emptyItems != null) {
+                                    return SliverFillRemaining(
+                                        child: widget.emptyItems);
+                                  }
+                                  return SliverList(
+                                      delegate: SliverChildBuilderDelegate(
+                                    (BuildContext context, int index) {
+                                      return KeepAlive(
+                                        keepAlive: true,
+                                        child: IndexedSemantics(
+                                          index: index,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                _index = index;
+                                              });
+                                            },
+                                            child: Container(
+                                              color: _index == index
+                                                  ? Theme.of(context)
+                                                      .chipTheme
+                                                      .disabledColor
+                                                  : widget.backgroundColor,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5.0),
+                                              child: _childDelagate.build(
+                                                  context, index),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  );
+                                      );
+                                    },
+                                    childCount:
+                                        _childDelagate.estimatedChildCount ?? 0,
+                                    addAutomaticKeepAlives: false,
+                                    addRepaintBoundaries: false,
+                                    addSemanticIndexes: false,
+                                  ));
                                 },
-                                childCount:
-                                    _childDelagate.estimatedChildCount ?? 0,
-                                addAutomaticKeepAlives: false,
-                                addRepaintBoundaries: false,
-                                addSemanticIndexes: false,
-                              ));
-                            },
-                          )
-                        ],
-                      ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ]))),
           Flexible(
