@@ -117,7 +117,6 @@ class MobileView extends StatelessWidget {
                           }));
                         },
                         child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: childDelagate.build(context, index),
                         ),
                       ),

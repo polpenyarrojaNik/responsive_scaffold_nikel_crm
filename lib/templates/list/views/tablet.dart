@@ -253,7 +253,7 @@ class _TabletViewState extends State<TabletView> {
                                                   .disabledColor
                                               : widget.backgroundColor,
                                           padding: const EdgeInsets.symmetric(
-                                              vertical: 8.0),
+                                              vertical: 5.0),
                                           child: _childDelagate.build(
                                               context, index),
                                         ),
