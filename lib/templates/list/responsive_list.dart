@@ -40,7 +40,8 @@ class ResponsiveListScaffold extends StatelessWidget {
       this.mobileNavigator,
       required this.scrollController,
       required this.haveConnection,
-      required this.text})
+      required this.text,
+      required this.registros})
       : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -83,7 +84,8 @@ class ResponsiveListScaffold extends StatelessWidget {
       this.mobileNavigator,
       required this.scrollController,
       required this.haveConnection,
-      required this.text})
+      required this.text,
+      required this.registros})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -126,7 +128,8 @@ class ResponsiveListScaffold extends StatelessWidget {
       this.mobileNavigator,
       required this.scrollController,
       required this.haveConnection,
-      required this.text})
+      required this.text,
+      required this.registros})
       : super(key: key);
 
   final double tabletBreakpoint;
@@ -186,6 +189,7 @@ class ResponsiveListScaffold extends StatelessWidget {
   final bool haveConnection;
 
   final String text;
+  final int? registros;
 
   @override
   Widget build(BuildContext context) {
@@ -224,6 +228,7 @@ class ResponsiveListScaffold extends StatelessWidget {
             scrollController: scrollController,
             haveConnection: haveConnection,
             text: text,
+            registros: registros,
           );
         }
 
@@ -245,17 +250,19 @@ class ResponsiveListScaffold extends StatelessWidget {
           endDrawer: endDrawer,
           appBar: appBar,
           body: MobileView.custom(
-              useRootNavigator: mobileRootNavigator,
-              nullItems: nullItems,
-              emptyItems: emptyItems,
-              slivers: slivers,
-              detailScaffoldKey: detailScaffoldKey,
-              detailBuilder: detailBuilder,
-              childDelagate: childDelagate,
-              navigator: mobileNavigator,
-              scrollController: scrollController,
-              haveConnection: haveConnection,
-              text: text),
+            useRootNavigator: mobileRootNavigator,
+            nullItems: nullItems,
+            emptyItems: emptyItems,
+            slivers: slivers,
+            detailScaffoldKey: detailScaffoldKey,
+            detailBuilder: detailBuilder,
+            childDelagate: childDelagate,
+            navigator: mobileNavigator,
+            scrollController: scrollController,
+            haveConnection: haveConnection,
+            text: text,
+            registros: registros,
+          ),
         );
       },
     );

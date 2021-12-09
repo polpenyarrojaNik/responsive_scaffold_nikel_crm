@@ -17,7 +17,8 @@ class MobileView extends StatelessWidget {
       required this.emptyItems,
       required this.scrollController,
       required this.haveConnection,
-      required this.text})
+      required this.text,
+      required this.registros})
       : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -39,7 +40,8 @@ class MobileView extends StatelessWidget {
       required this.emptyItems,
       required this.scrollController,
       required this.haveConnection,
-      required this.text})
+      required this.text,
+      required this.registros})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -61,7 +63,8 @@ class MobileView extends StatelessWidget {
       required this.emptyItems,
       required this.scrollController,
       required this.haveConnection,
-      required this.text})
+      required this.text,
+      required this.registros})
       : super(key: key);
 
   final List<Widget>? slivers;
@@ -74,11 +77,15 @@ class MobileView extends StatelessWidget {
   final ScrollController scrollController;
   final bool haveConnection;
   final String text;
+  final int? registros;
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       if (!haveConnection) NotConnectionWidget(text: text),
+      if (registros != null)
+        Text('$registros Items',
+            style: const TextStyle(color: Colors.grey, fontSize: 12)),
       Expanded(
           child: CustomScrollView(
         controller: scrollController,
