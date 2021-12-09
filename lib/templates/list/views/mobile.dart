@@ -85,7 +85,7 @@ class MobileView extends StatelessWidget {
       if (!haveConnection) NotConnectionWidget(text: text),
       if (registros != null)
         Container(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(10),
           child: Text('$registros Items',
               style: const TextStyle(color: Colors.grey, fontSize: 12)),
         ),
