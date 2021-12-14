@@ -112,7 +112,7 @@ class MobileView extends StatelessWidget {
       //       ]),
       if (registros != null || switchFilter1 != null)
         Row(
-            mainAxisAlignment: (textTopOfList != null)
+            mainAxisAlignment: (switchFilter1 != null)
                 ? MainAxisAlignment.spaceBetween
                 : MainAxisAlignment.end,
             children: [
