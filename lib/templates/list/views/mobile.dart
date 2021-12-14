@@ -116,7 +116,7 @@ class MobileView extends StatelessWidget {
                 ? MainAxisAlignment.spaceBetween
                 : MainAxisAlignment.end,
             children: [
-              if (switchFilter1 != null) switchFilter1!,
+              if (switchFilter1 != null) Flexible(child: switchFilter1!),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: Text('$registros Items',
