@@ -91,26 +91,26 @@ class MobileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       if (!haveConnection) NotConnectionWidget(text: text),
-      // if (registros != null || textTopOfList != null)
-      //   Row(
-      //       crossAxisAlignment: CrossAxisAlignment.end,
-      //       mainAxisAlignment: (textTopOfList != null)
-      //           ? MainAxisAlignment.spaceBetween
-      //           : MainAxisAlignment.end,
-      //       children: [
-      //         if (textTopOfList != null)
-      //           Container(
-      //             padding: const EdgeInsets.all(8),
-      //             child: Text('$textTopOfList',
-      //                 style: const TextStyle(color: Colors.grey, fontSize: 12)),
-      //           ),
-      //         Container(
-      //           padding: const EdgeInsets.all(8),
-      //           child: Text('$registros Items',
-      //               style: const TextStyle(color: Colors.grey, fontSize: 12)),
-      //         ),
-      //       ]),
-      if (registros != null || switchFilter1 != null)
+      if (registros != null && textTopOfList != null)
+        Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: (textTopOfList != null)
+                ? MainAxisAlignment.spaceBetween
+                : MainAxisAlignment.end,
+            children: [
+              if (textTopOfList != null)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  child: Text('$textTopOfList',
+                      style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Text('$registros Items',
+                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
+              ),
+            ]),
+      if (registros != null && switchFilter1 != null)
         Row(
             mainAxisAlignment: (switchFilter1 != null)
                 ? MainAxisAlignment.spaceBetween
