@@ -88,19 +88,22 @@ class MobileView extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       if (!haveConnection) NotConnectionWidget(text: text),
       if (registros != null || textTopOfList != null)
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: Text('$registros Items',
-                style: const TextStyle(color: Colors.grey, fontSize: 12)),
-          ),
-          if (textTopOfList != null)
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: Text('$textTopOfList',
-                  style: const TextStyle(color: Colors.grey, fontSize: 12)),
-            ),
-        ]),
+        Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Text('$registros Items',
+                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
+              ),
+              if (textTopOfList != null)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  child: Text('$textTopOfList',
+                      style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                ),
+            ]),
       Expanded(
           child: CustomScrollView(
         controller: scrollController,
