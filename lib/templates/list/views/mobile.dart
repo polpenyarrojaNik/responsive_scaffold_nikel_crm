@@ -91,7 +91,7 @@ class MobileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       if (!haveConnection) NotConnectionWidget(text: text),
-      if (registros != null && (textTopOfList != null && switchFilter1 == null))
+      if (registros != null && textTopOfList != null)
         Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: (textTopOfList != null)
