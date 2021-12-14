@@ -19,7 +19,8 @@ class MobileView extends StatelessWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
-      this.textTopOfList})
+      this.textTopOfList,
+      this.switchFilter1})
       : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -43,7 +44,8 @@ class MobileView extends StatelessWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
-      this.textTopOfList})
+      this.textTopOfList,
+      this.switchFilter1})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -67,7 +69,8 @@ class MobileView extends StatelessWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
-      this.textTopOfList})
+      this.textTopOfList,
+      this.switchFilter1})
       : super(key: key);
 
   final List<Widget>? slivers;
@@ -82,24 +85,39 @@ class MobileView extends StatelessWidget {
   final String text;
   final int? registros;
   final String? textTopOfList;
+  final Widget? switchFilter1;
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       if (!haveConnection) NotConnectionWidget(text: text),
-      if (registros != null || textTopOfList != null)
+      // if (registros != null || textTopOfList != null)
+      //   Row(
+      //       crossAxisAlignment: CrossAxisAlignment.end,
+      //       mainAxisAlignment: (textTopOfList != null)
+      //           ? MainAxisAlignment.spaceBetween
+      //           : MainAxisAlignment.end,
+      //       children: [
+      //         if (textTopOfList != null)
+      //           Container(
+      //             padding: const EdgeInsets.all(8),
+      //             child: Text('$textTopOfList',
+      //                 style: const TextStyle(color: Colors.grey, fontSize: 12)),
+      //           ),
+      //         Container(
+      //           padding: const EdgeInsets.all(8),
+      //           child: Text('$registros Items',
+      //               style: const TextStyle(color: Colors.grey, fontSize: 12)),
+      //         ),
+      //       ]),
+      if (registros != null || switchFilter1 != null)
         Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: (textTopOfList != null)
                 ? MainAxisAlignment.spaceBetween
                 : MainAxisAlignment.end,
             children: [
-              if (textTopOfList != null)
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  child: Text('$textTopOfList',
-                      style: const TextStyle(color: Colors.grey, fontSize: 12)),
-                ),
+              if (switchFilter1 != null) switchFilter1!,
               Container(
                 padding: const EdgeInsets.all(8),
                 child: Text('$registros Items',

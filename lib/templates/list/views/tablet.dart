@@ -40,6 +40,7 @@ class TabletView extends StatefulWidget {
     required this.text,
     required this.registros,
     this.textTopOfList,
+    this.switchFilter1,
   })  : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -80,7 +81,8 @@ class TabletView extends StatefulWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
-      this.textTopOfList})
+      this.textTopOfList,
+      this.switchFilter1})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -121,7 +123,8 @@ class TabletView extends StatefulWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
-      this.textTopOfList})
+      this.textTopOfList,
+      this.switchFilter1})
       : super(key: key);
 
   final List<Widget>? slivers;
@@ -174,6 +177,8 @@ class TabletView extends StatefulWidget {
 
   final String? textTopOfList;
 
+  final Widget? switchFilter1;
+
   @override
   _TabletViewState createState() => _TabletViewState();
 }
@@ -224,18 +229,28 @@ class _TabletViewState extends State<TabletView> {
                   children: [
                     if (!widget.haveConnection)
                       NotConnectionWidget(text: widget.text),
-                    Container(
-                        alignment: Alignment.centerRight,
-                        padding: const EdgeInsets.all(8),
-                        child: Text('${widget.registros} Items',
-                            style: const TextStyle(
-                                color: Colors.grey, fontSize: 12))),
-                    if (widget.textTopOfList != null)
-                      Container(
-                          padding: const EdgeInsets.all(8),
-                          child: Text('${widget.textTopOfList}',
-                              style: const TextStyle(
-                                  color: Colors.grey, fontSize: 12))),
+                    if (widget.registros != null ||
+                        widget.textTopOfList != null)
+                      Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: (widget.textTopOfList != null)
+                              ? MainAxisAlignment.spaceBetween
+                              : MainAxisAlignment.end,
+                          children: [
+                            if (widget.textTopOfList != null)
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                child: Text('${widget.textTopOfList}',
+                                    style: const TextStyle(
+                                        color: Colors.grey, fontSize: 12)),
+                              ),
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              child: Text('${widget.registros} Items',
+                                  style: const TextStyle(
+                                      color: Colors.grey, fontSize: 12)),
+                            ),
+                          ]),
                     Expanded(
                       child: CustomScrollView(
                         controller: widget.scrollController,
