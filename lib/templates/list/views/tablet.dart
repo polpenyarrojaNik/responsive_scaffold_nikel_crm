@@ -39,6 +39,7 @@ class TabletView extends StatefulWidget {
     required this.haveConnection,
     required this.text,
     required this.registros,
+    this.textTopOfList,
   })  : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -78,7 +79,8 @@ class TabletView extends StatefulWidget {
       required this.scrollController,
       required this.haveConnection,
       required this.text,
-      required this.registros})
+      required this.registros,
+      this.textTopOfList})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -118,7 +120,8 @@ class TabletView extends StatefulWidget {
       required this.scrollController,
       required this.haveConnection,
       required this.text,
-      required this.registros})
+      required this.registros,
+      this.textTopOfList})
       : super(key: key);
 
   final List<Widget>? slivers;
@@ -169,6 +172,8 @@ class TabletView extends StatefulWidget {
 
   final int? registros;
 
+  final String? textTopOfList;
+
   @override
   _TabletViewState createState() => _TabletViewState();
 }
@@ -198,101 +203,103 @@ class _TabletViewState extends State<TabletView> {
           Flexible(
               flex: widget.flexListView,
               child: Scaffold(
-                  key: widget.scaffoldkey,
-                  floatingActionButton: widget.floatingActionButton,
-                  floatingActionButtonLocation:
-                      widget.floatingActionButtonLocation,
-                  bottomNavigationBar: widget.bottomNavigationBar,
-                  bottomSheet: widget.bottomSheet,
-                  persistentFooterButtons: widget.persistentFooterButtons,
-                  floatingActionButtonAnimator:
-                      widget.floatingActionButtonAnimator,
-                  resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-                  // resizeToAvoidBottomPadding: widget.resizeToAvoidBottomPadding,
-                  primary: widget.primary,
-                  // extendBody: extendBody,
-                  backgroundColor: widget.backgroundColor,
-                  drawer: widget.drawer,
-                  endDrawer: widget.endDrawer,
-                  appBar: widget.appBar,
-                  body: Column(children: [
+                key: widget.scaffoldkey,
+                floatingActionButton: widget.floatingActionButton,
+                floatingActionButtonLocation:
+                    widget.floatingActionButtonLocation,
+                bottomNavigationBar: widget.bottomNavigationBar,
+                bottomSheet: widget.bottomSheet,
+                persistentFooterButtons: widget.persistentFooterButtons,
+                floatingActionButtonAnimator:
+                    widget.floatingActionButtonAnimator,
+                resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+                // resizeToAvoidBottomPadding: widget.resizeToAvoidBottomPadding,
+                primary: widget.primary,
+                // extendBody: extendBody,
+                backgroundColor: widget.backgroundColor,
+                drawer: widget.drawer,
+                endDrawer: widget.endDrawer,
+                appBar: widget.appBar,
+                body: Column(
+                  children: [
                     if (!widget.haveConnection)
                       NotConnectionWidget(text: widget.text),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                            padding: const EdgeInsets.all(8),
-                            child: Text('${widget.registros} Items',
-                                style: const TextStyle(
-                                    color: Colors.grey, fontSize: 12))),
-                        Expanded(
-                          child: CustomScrollView(
-                            controller: widget.scrollController,
-                            physics: const BouncingScrollPhysics(
-                                parent: AlwaysScrollableScrollPhysics()),
-                            slivers: <Widget>[
-                              ...?widget.slivers,
-                              Builder(
-                                builder: (BuildContext context) {
-                                  final SliverChildDelegate _childDelagate =
-                                      widget.childDelagate;
-                                  if (_childDelagate.estimatedChildCount ==
-                                          null &&
-                                      widget.nullItems != null) {
-                                    return SliverFillRemaining(
-                                        child: widget.nullItems);
-                                  }
-                                  if (_childDelagate.estimatedChildCount !=
-                                          null &&
-                                      _childDelagate.estimatedChildCount == 0 &&
-                                      widget.emptyItems != null) {
-                                    return SliverFillRemaining(
-                                        child: widget.emptyItems);
-                                  }
-                                  return SliverList(
-                                      delegate: SliverChildBuilderDelegate(
-                                    (BuildContext context, int index) {
-                                      return KeepAlive(
-                                        keepAlive: true,
-                                        child: IndexedSemantics(
-                                          index: index,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                _index = index;
-                                              });
-                                            },
-                                            child: Container(
-                                              color: _index == index
-                                                  ? Theme.of(context)
-                                                      .chipTheme
-                                                      .disabledColor
-                                                  : widget.backgroundColor,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 5.0),
-                                              child: _childDelagate.build(
-                                                  context, index),
-                                            ),
-                                          ),
+                    Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.all(8),
+                        child: Text('${widget.registros} Items',
+                            style: const TextStyle(
+                                color: Colors.grey, fontSize: 12))),
+                    if (widget.textTopOfList != null)
+                      Container(
+                          padding: const EdgeInsets.all(8),
+                          child: Text('${widget.textTopOfList}',
+                              style: const TextStyle(
+                                  color: Colors.grey, fontSize: 12))),
+                    Expanded(
+                      child: CustomScrollView(
+                        controller: widget.scrollController,
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        slivers: <Widget>[
+                          ...?widget.slivers,
+                          Builder(
+                            builder: (BuildContext context) {
+                              final SliverChildDelegate _childDelagate =
+                                  widget.childDelagate;
+                              if (_childDelagate.estimatedChildCount == null &&
+                                  widget.nullItems != null) {
+                                return SliverFillRemaining(
+                                    child: widget.nullItems);
+                              }
+                              if (_childDelagate.estimatedChildCount != null &&
+                                  _childDelagate.estimatedChildCount == 0 &&
+                                  widget.emptyItems != null) {
+                                return SliverFillRemaining(
+                                    child: widget.emptyItems);
+                              }
+                              return SliverList(
+                                  delegate: SliverChildBuilderDelegate(
+                                (BuildContext context, int index) {
+                                  return KeepAlive(
+                                    keepAlive: true,
+                                    child: IndexedSemantics(
+                                      index: index,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _index = index;
+                                          });
+                                        },
+                                        child: Container(
+                                          color: _index == index
+                                              ? Theme.of(context)
+                                                  .chipTheme
+                                                  .disabledColor
+                                              : widget.backgroundColor,
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: _childDelagate.build(
+                                              context, index),
                                         ),
-                                      );
-                                    },
-                                    childCount:
-                                        _childDelagate.estimatedChildCount ?? 0,
-                                    addAutomaticKeepAlives: false,
-                                    addRepaintBoundaries: false,
-                                    addSemanticIndexes: false,
-                                  ));
+                                      ),
+                                    ),
+                                  );
                                 },
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
+                                childCount:
+                                    _childDelagate.estimatedChildCount ?? 0,
+                                addAutomaticKeepAlives: false,
+                                addRepaintBoundaries: false,
+                                addSemanticIndexes: false,
+                              ));
+                            },
+                          )
+                        ],
+                      ),
                     ),
-                  ]))),
+                  ],
+                ),
+              )),
           Flexible(
             flex: widget.flexDetailView,
             child: _DetailView(

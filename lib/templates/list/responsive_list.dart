@@ -41,7 +41,8 @@ class ResponsiveListScaffold extends StatelessWidget {
       required this.scrollController,
       required this.haveConnection,
       required this.text,
-      required this.registros})
+      required this.registros,
+      this.textTopOfList})
       : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -85,7 +86,8 @@ class ResponsiveListScaffold extends StatelessWidget {
       required this.scrollController,
       required this.haveConnection,
       required this.text,
-      required this.registros})
+      required this.registros,
+      this.textTopOfList})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -129,7 +131,8 @@ class ResponsiveListScaffold extends StatelessWidget {
       required this.scrollController,
       required this.haveConnection,
       required this.text,
-      required this.registros})
+      required this.registros,
+      this.textTopOfList})
       : super(key: key);
 
   final double tabletBreakpoint;
@@ -190,6 +193,7 @@ class ResponsiveListScaffold extends StatelessWidget {
 
   final String text;
   final int? registros;
+  final String? textTopOfList;
 
   @override
   Widget build(BuildContext context) {
@@ -229,6 +233,7 @@ class ResponsiveListScaffold extends StatelessWidget {
             haveConnection: haveConnection,
             text: text,
             registros: registros,
+            textTopOfList: textTopOfList,
           );
         }
 
@@ -262,6 +267,7 @@ class ResponsiveListScaffold extends StatelessWidget {
             haveConnection: haveConnection,
             text: text,
             registros: registros,
+            textTopOfList: textTopOfList,
           ),
         );
       },
