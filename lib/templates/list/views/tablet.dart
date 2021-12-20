@@ -39,6 +39,7 @@ class TabletView extends StatefulWidget {
     required this.haveConnection,
     required this.text,
     required this.registros,
+    required this.isLoading,
     this.textTopOfList,
     this.switchFilter1,
   })  : childDelagate = SliverChildListDelegate(
@@ -81,6 +82,7 @@ class TabletView extends StatefulWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
+      required this.isLoading,
       this.textTopOfList,
       this.switchFilter1})
       : childDelagate = SliverChildBuilderDelegate(
@@ -123,6 +125,7 @@ class TabletView extends StatefulWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
+      required this.isLoading,
       this.textTopOfList,
       this.switchFilter1})
       : super(key: key);
@@ -174,6 +177,8 @@ class TabletView extends StatefulWidget {
   final String text;
 
   final int? registros;
+
+  final bool isLoading;
 
   final String? textTopOfList;
 
@@ -227,6 +232,8 @@ class _TabletViewState extends State<TabletView> {
                 appBar: widget.appBar,
                 body: Column(
                   children: [
+                    if (widget.isLoading)
+                      const LinearProgressIndicator(color: Color(0xffffc400)),
                     if (!widget.haveConnection)
                       NotConnectionWidget(text: widget.text),
                     if (widget.registros != null ||

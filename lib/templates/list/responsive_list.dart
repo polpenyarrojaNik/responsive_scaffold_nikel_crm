@@ -42,6 +42,7 @@ class ResponsiveListScaffold extends StatelessWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
+      required this.isLoading,
       this.textTopOfList,
       this.switchFilter1})
       : childDelagate = SliverChildListDelegate(
@@ -88,6 +89,7 @@ class ResponsiveListScaffold extends StatelessWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
+      required this.isLoading,
       this.textTopOfList,
       this.switchFilter1})
       : childDelagate = SliverChildBuilderDelegate(
@@ -134,6 +136,7 @@ class ResponsiveListScaffold extends StatelessWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
+      required this.isLoading,
       this.textTopOfList,
       this.switchFilter1})
       : super(key: key);
@@ -196,6 +199,7 @@ class ResponsiveListScaffold extends StatelessWidget {
 
   final String text;
   final int? registros;
+  final bool isLoading;
   final String? textTopOfList;
   final Widget? switchFilter1;
 
@@ -237,6 +241,7 @@ class ResponsiveListScaffold extends StatelessWidget {
             haveConnection: haveConnection,
             text: text,
             registros: registros,
+            isLoading: isLoading,
             textTopOfList: textTopOfList,
             switchFilter1: switchFilter1,
           );
@@ -272,6 +277,7 @@ class ResponsiveListScaffold extends StatelessWidget {
               haveConnection: haveConnection,
               text: text,
               registros: registros,
+              isLoading: isLoading,
               textTopOfList: textTopOfList,
               switchFilter1: switchFilter1),
         );

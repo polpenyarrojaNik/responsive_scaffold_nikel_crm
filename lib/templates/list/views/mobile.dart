@@ -19,6 +19,7 @@ class MobileView extends StatelessWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
+      required this.isLoading,
       this.textTopOfList,
       this.switchFilter1})
       : childDelagate = SliverChildListDelegate(
@@ -44,6 +45,7 @@ class MobileView extends StatelessWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
+      required this.isLoading,
       this.textTopOfList,
       this.switchFilter1})
       : childDelagate = SliverChildBuilderDelegate(
@@ -69,6 +71,7 @@ class MobileView extends StatelessWidget {
       required this.haveConnection,
       required this.text,
       required this.registros,
+      required this.isLoading,
       this.textTopOfList,
       this.switchFilter1})
       : super(key: key);
@@ -86,10 +89,12 @@ class MobileView extends StatelessWidget {
   final int? registros;
   final String? textTopOfList;
   final Widget? switchFilter1;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+      if (isLoading) const LinearProgressIndicator(color: Color(0xffffc400)),
       if (!haveConnection) NotConnectionWidget(text: text),
       if (switchFilter1 == null && (registros != null || textTopOfList != null))
         Row(
