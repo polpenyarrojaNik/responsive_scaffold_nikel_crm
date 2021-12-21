@@ -86,7 +86,7 @@ class MobileView extends StatelessWidget {
   final ScrollController scrollController;
   final bool haveConnection;
   final String text;
-  final int? registros;
+  final String? registros;
   final String? textTopOfList;
   final Widget? switchFilter1;
   final bool isLoading;

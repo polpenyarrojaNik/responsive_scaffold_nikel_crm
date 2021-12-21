@@ -198,7 +198,7 @@ class ResponsiveListScaffold extends StatelessWidget {
   final bool haveConnection;
 
   final String text;
-  final int? registros;
+  final String? registros;
   final bool isLoading;
   final String? textTopOfList;
   final Widget? switchFilter1;

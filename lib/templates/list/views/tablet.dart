@@ -176,7 +176,7 @@ class TabletView extends StatefulWidget {
 
   final String text;
 
-  final int? registros;
+  final String? registros;
 
   final bool isLoading;
 
