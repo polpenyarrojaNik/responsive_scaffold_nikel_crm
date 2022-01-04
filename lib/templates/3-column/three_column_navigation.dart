@@ -1,6 +1,5 @@
 import 'dart:developer' as developer show log;
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -277,7 +276,7 @@ class MenuButton extends StatelessWidget {
   const MenuButton({
     Key? key,
     required GlobalKey<ScaffoldState> scaffoldKey,
-  })   : _scaffoldKey = scaffoldKey,
+  })  : _scaffoldKey = scaffoldKey,
         super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey;
@@ -300,7 +299,7 @@ class SectionsDrawer extends StatelessWidget {
     required int sectionIndex,
     required this.sectionChanged,
     required this.sections,
-  })   : _sectionIndex = sectionIndex,
+  })  : _sectionIndex = sectionIndex,
         super(key: key);
 
   final List<MainSection> sections;
