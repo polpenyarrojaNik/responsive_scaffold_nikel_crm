@@ -111,14 +111,6 @@ class MobileView extends StatelessWidget {
                     style: const TextStyle(color: Colors.grey, fontSize: 12)),
               ),
             ]),
-      if (registros != null && textTopOfList == null)
-        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: Text('$registros Items',
-                style: const TextStyle(color: Colors.grey, fontSize: 12)),
-          ),
-        ]),
       Expanded(
           child: CustomScrollView(
         controller: scrollController,
