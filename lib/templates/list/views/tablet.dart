@@ -6,41 +6,40 @@ import '../../../responsive_scaffold.dart';
 import '../responsive_list.dart';
 
 class TabletView extends StatefulWidget {
-  TabletView({
-    Key? key,
-    required this.slivers,
-    required this.detailBuilder,
-    required List<Widget> children,
-    required this.itemNotSelected,
-    required this.sideMenu,
-    this.flexListView = 4,
-    this.flexDetailView = 8,
-    required this.appBar,
-    required this.backgroundColor,
-    required this.bottomNavigationBar,
-    required this.bottomSheet,
-    required this.drawer,
-    required this.drawerDragStartBehavior,
-    required this.endDrawer,
-    required this.floatingActionButton,
-    required this.floatingActionButtonAnimator,
-    required this.floatingActionButtonLocation,
-    required this.persistentFooterButtons,
-    required this.primary,
-    required this.resizeToAvoidBottomInset,
-    required this.resizeToAvoidBottomPadding,
-    required this.scaffoldkey,
-    required this.detailScaffoldKey,
-    required this.nullItems,
-    required this.emptyItems,
-    required this.scrollController,
-    required this.haveConnection,
-    required this.text,
-    required this.registros,
-    required this.isLoading,
-    this.textTopOfList,
-    this.switchFilter1,
-  })  : childDelagate = SliverChildListDelegate(
+  TabletView(
+      {Key? key,
+      required this.slivers,
+      required this.detailBuilder,
+      required List<Widget> children,
+      required this.itemNotSelected,
+      required this.sideMenu,
+      this.flexListView = 4,
+      this.flexDetailView = 8,
+      required this.appBar,
+      required this.backgroundColor,
+      required this.bottomNavigationBar,
+      required this.bottomSheet,
+      required this.drawer,
+      required this.drawerDragStartBehavior,
+      required this.endDrawer,
+      required this.floatingActionButton,
+      required this.floatingActionButtonAnimator,
+      required this.floatingActionButtonLocation,
+      required this.persistentFooterButtons,
+      required this.primary,
+      required this.resizeToAvoidBottomInset,
+      required this.resizeToAvoidBottomPadding,
+      required this.scaffoldkey,
+      required this.detailScaffoldKey,
+      required this.nullItems,
+      required this.emptyItems,
+      required this.scrollController,
+      required this.haveConnection,
+      required this.text,
+      required this.registros,
+      required this.isLoading,
+      this.textTopOfList})
+      : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
           addRepaintBoundaries: false,
@@ -81,8 +80,7 @@ class TabletView extends StatefulWidget {
       required this.text,
       required this.registros,
       required this.isLoading,
-      this.textTopOfList,
-      this.switchFilter1})
+      this.textTopOfList})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -124,8 +122,7 @@ class TabletView extends StatefulWidget {
       required this.text,
       required this.registros,
       required this.isLoading,
-      this.textTopOfList,
-      this.switchFilter1})
+      this.textTopOfList})
       : super(key: key);
 
   final List<Widget>? slivers;
@@ -179,8 +176,6 @@ class TabletView extends StatefulWidget {
   final bool isLoading;
 
   final String? textTopOfList;
-
-  final Widget? switchFilter1;
 
   @override
   _TabletViewState createState() => _TabletViewState();

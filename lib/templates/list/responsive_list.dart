@@ -43,8 +43,7 @@ class ResponsiveListScaffold extends StatelessWidget {
       required this.text,
       required this.registros,
       required this.isLoading,
-      this.textTopOfList,
-      this.switchFilter1})
+      this.textTopOfList})
       : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -90,8 +89,7 @@ class ResponsiveListScaffold extends StatelessWidget {
       required this.text,
       required this.registros,
       required this.isLoading,
-      this.textTopOfList,
-      this.switchFilter1})
+      this.textTopOfList})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -137,8 +135,7 @@ class ResponsiveListScaffold extends StatelessWidget {
       required this.text,
       required this.registros,
       required this.isLoading,
-      this.textTopOfList,
-      this.switchFilter1})
+      this.textTopOfList})
       : super(key: key);
 
   final double tabletBreakpoint;
@@ -201,7 +198,6 @@ class ResponsiveListScaffold extends StatelessWidget {
   final String? registros;
   final bool isLoading;
   final String? textTopOfList;
-  final Widget? switchFilter1;
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +239,6 @@ class ResponsiveListScaffold extends StatelessWidget {
             registros: registros,
             isLoading: isLoading,
             textTopOfList: textTopOfList,
-            switchFilter1: switchFilter1,
           );
         }
 
@@ -278,8 +273,7 @@ class ResponsiveListScaffold extends StatelessWidget {
               text: text,
               registros: registros,
               isLoading: isLoading,
-              textTopOfList: textTopOfList,
-              switchFilter1: switchFilter1),
+              textTopOfList: textTopOfList),
         );
       },
     );

@@ -20,8 +20,7 @@ class MobileView extends StatelessWidget {
       required this.text,
       required this.registros,
       required this.isLoading,
-      this.textTopOfList,
-      this.switchFilter1})
+      this.textTopOfList})
       : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -46,8 +45,7 @@ class MobileView extends StatelessWidget {
       required this.text,
       required this.registros,
       required this.isLoading,
-      this.textTopOfList,
-      this.switchFilter1})
+      this.textTopOfList})
       : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -72,8 +70,7 @@ class MobileView extends StatelessWidget {
       required this.text,
       required this.registros,
       required this.isLoading,
-      this.textTopOfList,
-      this.switchFilter1})
+      this.textTopOfList})
       : super(key: key);
 
   final List<Widget>? slivers;
@@ -88,7 +85,6 @@ class MobileView extends StatelessWidget {
   final String text;
   final String? registros;
   final String? textTopOfList;
-  final Widget? switchFilter1;
   final bool isLoading;
 
   @override
@@ -96,7 +92,7 @@ class MobileView extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       if (isLoading) const LinearProgressIndicator(color: Color(0xffffc400)),
       if (!haveConnection) NotConnectionWidget(text: text),
-      if (switchFilter1 == null && (registros != null || textTopOfList != null))
+      if (registros != null || textTopOfList != null)
         Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: (textTopOfList != null)
@@ -115,19 +111,14 @@ class MobileView extends StatelessWidget {
                     style: const TextStyle(color: Colors.grey, fontSize: 12)),
               ),
             ]),
-      if (registros != null && switchFilter1 != null && textTopOfList == null)
-        Row(
-            mainAxisAlignment: (switchFilter1 != null)
-                ? MainAxisAlignment.spaceBetween
-                : MainAxisAlignment.end,
-            children: [
-              if (switchFilter1 != null) Flexible(child: switchFilter1!),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: Text('$registros Items',
-                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
-              ),
-            ]),
+      if (registros != null && textTopOfList == null)
+        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            child: Text('$registros Items',
+                style: const TextStyle(color: Colors.grey, fontSize: 12)),
+          ),
+        ]),
       Expanded(
           child: CustomScrollView(
         controller: scrollController,
